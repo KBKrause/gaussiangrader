@@ -11,9 +11,4 @@ public partial class login : System.Web.UI.Page
     {
 
     }
-
-    protected void ClickSignupSubmit(object sender, EventArgs e)
-    {
-        
-    }
 }

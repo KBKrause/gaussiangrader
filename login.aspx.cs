@@ -12,8 +12,8 @@ public partial class login : System.Web.UI.Page
 
     }
 
-    protected void Button2_Click(object sender, EventArgs e)
+    protected void ClickSignupSubmit(object sender, EventArgs e)
     {
-
+        
     }
 }

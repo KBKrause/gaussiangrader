@@ -42,13 +42,13 @@
                         <br />
                         Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="txt_last" runat="server"></asp:TextBox>
                         <br />
-                        Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="txt_password" runat="server"></asp:TextBox>
+                        Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="txt_password" runat="server" TextMode="Password"></asp:TextBox>
                         <br />
-                        Confirm Password: <asp:TextBox ID="txt_confirmPassword" runat="server"></asp:TextBox>
+                        Confirm Password: <asp:TextBox ID="txt_confirmPassword" runat="server" TextMode="Password"></asp:TextBox>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <asp:Button ID="buttonSubmitSignup" runat="server" Text="Submit" OnClientClick="signUpValidation()"/>
+                        <asp:Button ID="buttonSubmitSignup" runat="server" Text="Submit" OnClick="Click_signUpSubmit"/>
                     </div>
                 </div>
             </div>

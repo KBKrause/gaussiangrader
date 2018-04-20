@@ -11,4 +11,18 @@ public partial class login : System.Web.UI.Page
     {
 
     }
+
+    protected void Click_signUpSubmit(object sender, EventArgs e)
+    {
+        //System.Diagnostics.Debug.Print("retval");
+
+        if (txt_password.Text != txt_confirmPassword.Text)
+        {
+            System.Diagnostics.Debug.Print("pwds don't match!");
+        }
+        else
+        {
+            System.Diagnostics.Debug.Print("pwds match!");
+        }
+    }
 }

@@ -42,6 +42,9 @@
                         <br />
                         Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="txt_last" runat="server"></asp:TextBox>
                         <br />
+                        Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:TextBox ID="txt_email" runat="server" TextMode="Email"></asp:TextBox>
+                        <br />
                         Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="txt_password" runat="server" TextMode="Password"></asp:TextBox>
                         <br />
                         Confirm Password: <asp:TextBox ID="txt_confirmPassword" runat="server" TextMode="Password"></asp:TextBox>

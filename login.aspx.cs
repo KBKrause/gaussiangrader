@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -23,6 +25,13 @@ public partial class login : System.Web.UI.Page
         else
         {
             System.Diagnostics.Debug.Print("pwds match!");
+            DatabaseManager db = new DatabaseManager("SELECT * FROM Instructors");
+
+            while (db.Reader.Read())
+            {
+                System.Diagnostics.Debug.Print(db.Reader.GetValue(0).ToString());
+            }
+
         }
     }
 }

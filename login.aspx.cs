@@ -18,10 +18,18 @@ public partial class Login : System.Web.UI.Page
     {
         //System.Diagnostics.Debug.Print("retval");
 
+        // Check the textboxes first
         if (txt_password.Text != txt_confirmPassword.Text)
         {
             // TODO set some mini debug thing to show that they don't match.
             System.Diagnostics.Debug.Print("pwds don't match!");
+        }
+        else if ((txt_first.Text == "") || (txt_last.Text == "") || (txt_email.Text == "") || (txt_password.Text == "") || (txt_confirmPassword.Text == ""))
+        {
+            labelErrorModalText.Text = "You did not fill in 1 or more fields.";
+
+            // This calls a Javascript function called "errorModal()."
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Error", "errorModal();", true);
         }
         else
         {
@@ -48,7 +56,12 @@ public partial class Login : System.Web.UI.Page
             // If they are good, insert into db.
             else
             {
+                DatabaseManager.InsertInstructor(txt_email.Text, txt_first.Text, txt_last.Text, txt_password.Text);
 
+                labelSuccessModal.Text = "Your account has been created! Please login to get started.";
+                
+                // This calls a Javascript function called "errorModal()."
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Error", "successModal();", true);
             }
         }
     }

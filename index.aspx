@@ -19,13 +19,6 @@
                 </div>
             </div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:GradebookConnectionString %>" SelectCommand="SELECT * FROM [Instructors]"></asp:SqlDataSource>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">
-            <Columns>
-                <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
-                <asp:BoundField DataField="first" HeaderText="first" SortExpression="first" />
-            </Columns>
-        </asp:GridView>
     </form>
 </body>
 </html>

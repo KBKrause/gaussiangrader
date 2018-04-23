@@ -56,6 +56,27 @@ public sealed class DatabaseManager
         this.reader = reader;
     }
 
+    // use vectors
+    public static void InsertInstructor(string id, string first, string last, string pwd)
+    {
+        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString;
+
+        System.Data.SqlClient.SqlConnection sqlConnection1 = new System.Data.SqlClient.SqlConnection(connString);
+
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
+        cmd.CommandType = System.Data.CommandType.Text;
+
+        string valuesString = "('" + id + "', '" + first + "', '" + last + "', '" + pwd + "')";
+        System.Diagnostics.Debug.Print("valuesString: " + valuesString);
+
+        cmd.CommandText = "INSERT Instructors (Id, first, last, pwd) VALUES " + valuesString;
+        cmd.Connection = sqlConnection1;
+
+        sqlConnection1.Open();
+        cmd.ExecuteNonQuery();
+        sqlConnection1.Close();
+    }
+
     ~DatabaseManager()
     {
         // Close the connection when this object is being gc'd.

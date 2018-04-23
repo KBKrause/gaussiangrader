@@ -7,6 +7,7 @@ using System.Web;
 
 /// <summary>
 /// The DatabaseManager class handles and encapsulates the SQL logic to access the application's database.
+/// TODO: Fix this class so it can handle multiple queries.
 /// </summary>
 public sealed class DatabaseManager
 {

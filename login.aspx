@@ -1,10 +1,21 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="login.aspx.cs" Inherits="login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <script src="login.js"></script>
+
+    <!-- "Local" Javascript 
+        TODO I really dislike putting this here. Can we get it into login.js instead?
+        -->
+    <script>
+        function errorModal()
+        {
+            $('#errorModal').modal('show');
+        }
+    </script>
+
     <title>Gaussigrader - Login / Signup</title>
 </head>
 <body>
@@ -26,7 +37,7 @@
             Sign Up
         </button>
 
-        <!-- Modal -->
+        <!-- Signup modal -->
         <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -56,6 +67,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- Error modal -->
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2"><span class="glyphicon glyphicon-exclamation-sign"></span>Whoops!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <asp:Label ID="labelErrorModalText" runat="server" Text=""></asp:Label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
     </form>
 </body>
 </html>

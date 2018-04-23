@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class login : System.Web.UI.Page
+public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,18 +20,36 @@ public partial class login : System.Web.UI.Page
 
         if (txt_password.Text != txt_confirmPassword.Text)
         {
+            // TODO set some mini debug thing to show that they don't match.
             System.Diagnostics.Debug.Print("pwds don't match!");
         }
         else
         {
             System.Diagnostics.Debug.Print("pwds match!");
-            DatabaseManager db = new DatabaseManager("SELECT * FROM Instructors");
 
-            while (db.Reader.Read())
+            // Surround the text with apostrophes so SQL uses this as a row value instead of a column name.
+            // See below for the full query.
+            string email = "'" + txt_email.Text + "'";
+
+            // Be careful when using SELECT / FROM / WHERE / =. The strings must be an exact match as they are represented in the db.
+            DatabaseManager db = new DatabaseManager("SELECT * FROM Instructors WHERE Id = " + email);
+
+            // db.Reader.Read() advances through the selected rows, if any were found.
+
+            // If this email already exists, do not proceed.
+            if (db.Reader.HasRows)
             {
-                System.Diagnostics.Debug.Print(db.Reader.GetValue(0).ToString());
-            }
+                labelErrorModalText.Text = "This email already exists in our database.";
 
+                // This calls a Javascript function called "errorModal()."
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Error", "errorModal();", true);
+            }
+            // If this email doesn't exist, check the other fields to make sure they're good.
+            // If they are good, insert into db.
+            else
+            {
+
+            }
         }
     }
 }

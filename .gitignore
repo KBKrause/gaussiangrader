@@ -6,3 +6,6 @@ Bin
 
 # Ignore the database
 App_Data
+
+# Ignore the images
+Images

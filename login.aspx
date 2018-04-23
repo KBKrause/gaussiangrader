@@ -31,13 +31,12 @@
             Password:&nbsp;
                     <asp:TextBox ID="textPassword" runat="server" TextMode="Password"></asp:TextBox>
         </p>
-        <asp:Button ID="Button1" runat="server" Text="Login" />
+        <asp:Button ID="Button1" runat="server" Text="Login" OnClick="Click_login" />
         &nbsp;&nbsp;
 
     <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signUpModal">
-            Sign Up
-        </button>
+            Sign Up</button>
 
         <!-- Signup modal -->
         <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

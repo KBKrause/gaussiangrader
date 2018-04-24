@@ -3,5 +3,10 @@
 
 # Ignore the binary junk created by VS
 Bin
+
+# DB logs
 App_Data/Gradebook.mdf
 App_Data/Gradebook_log.ldf
+
+# Ignore the images
+Images

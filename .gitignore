@@ -3,3 +3,9 @@
 
 # Ignore the binary junk created by VS
 Bin
+
+# Ignore the database
+App_Data
+
+# Ignore the images
+Images

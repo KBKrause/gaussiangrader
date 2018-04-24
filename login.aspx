@@ -1,15 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <script src="login.js"></script>
-
-    <!-- "Local" Javascript 
-        TODO I really dislike putting this here. Can we get it into login.js instead?
-        -->
-    <script>
+<asp:Content ID="Content1" ContentPlaceHolderID="MASTER_HEADER" Runat="Server">
+        <script>
         function errorModal() {
             $('#errorModal').modal('show');
         }
@@ -19,10 +11,8 @@
     </script>
 
     <title>Gaussigrader - Login / Signup</title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <!--#include file ="navbar.aspx"-->
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MASTER_BODY" runat="server">
         <p>
             Username:
                     <asp:TextBox ID="textUserName" runat="server"></asp:TextBox>
@@ -112,6 +102,4 @@
                 </div>
             </div>
         </div>
-    </form>
-</body>
-</html>
+    </asp:Content>

@@ -1,14 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="Index" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="Index" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MASTER_HEADER" Runat="Server">
     <title>Gaussigrader - Home</title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <!--#include file ="navbar.aspx"-->
+    </asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MASTER_BODY" runat="server">
         <div>
             Hello world! This is the main page of the application.
             <div class="card" style="width: 18rem;">
@@ -19,6 +14,4 @@
                 </div>
             </div>
         </div>
-    </form>
-</body>
-</html>
+    </asp:Content>

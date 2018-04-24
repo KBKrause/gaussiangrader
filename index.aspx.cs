@@ -9,7 +9,6 @@ public partial class Index : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        System.Diagnostics.Debug.Print((string)Session["username"]);
-        System.Diagnostics.Debug.Print((string)Session["email"]);
+        // If Session[key] is not valid or has not been set, it returns null.
     }
 }

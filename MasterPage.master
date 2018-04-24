@@ -30,7 +30,7 @@
                                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
+                                <a class="nav-link" href="MemberPages/hub.aspx">Hub</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#">Disabled</a>
@@ -40,7 +40,17 @@
                 </nav>
             </div>
             <div class="col-2">
-                <asp:LoginStatus ID="loginStatus" runat="server" />
+                <asp:LoginView ID="LoginView1" runat="server">
+                    <AnonymousTemplate>
+                        You are not logged in. Click &quot;Login&quot; to sign in.
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        Welcome,
+                        <asp:LoginName ID="LoginName1" runat="server" />
+                    </LoggedInTemplate>
+                </asp:LoginView>
+                <br />
+                <asp:LoginStatus ID="LoginStatus1" runat="server" />
             </div>
         </div>
         <asp:ContentPlaceHolder id="MASTER_BODY" runat="server">

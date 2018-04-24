@@ -14,4 +14,5 @@
                 </div>
             </div>
         </div>
+    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MemberPages/hub.aspx">HyperLink</asp:HyperLink>
     </asp:Content>

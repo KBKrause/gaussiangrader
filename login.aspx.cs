@@ -80,11 +80,14 @@ public partial class Login : System.Web.UI.Page
             }
             else
             {
+                db.Reader.Read();
                 // Do a page redirect after acquiring user info.
-                Session["username"] = db.Reader.GetValue(1) + " " + db.Reader.GetValue(2);
-                Session["email"] = textUserName;
+                Session["username"] = db.Reader.GetString(1) + " " + db.Reader.GetString(2);
+                Session["email"] = db.Reader.GetString(0);
 
-                System.Diagnostics.Debug.Print("Username found is " + (string)Session["username"]);
+                Server.Transfer("index.aspx", true);
+
+                //System.Diagnostics.Debug.Print("Username found is " + (string)Session["username"]);
             }
         }
     }

@@ -3,3 +3,5 @@
 
 # Ignore the binary junk created by VS
 Bin
+App_Data/Gradebook.mdf
+App_Data/Gradebook_log.ldf

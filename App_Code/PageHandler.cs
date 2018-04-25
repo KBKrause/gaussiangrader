@@ -14,7 +14,6 @@ public sealed class PageHandler
     {
         label.Text = bodyText;
 
-        // This calls a Javascript function called "errorModal()."
-        ScriptManager.RegisterStartupScript(page, page.GetType(), "Error", functionCall, true);
+        ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", functionCall, true);
     }
 }

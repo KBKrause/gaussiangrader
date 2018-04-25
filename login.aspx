@@ -1,6 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="login.aspx.cs" Inherits="Login" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MASTER_HEADER" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MASTER_HEADER" runat="server">
+    <script src="login.js"></script>
         <script>
         function errorModal() {
             $('#errorModal').modal('show');
@@ -9,24 +10,18 @@
             $('#successModal').modal('show');
         }
     </script>
-
-    <title>Gaussigrader - Login / Signup</title>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MASTER_BODY" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MASTER_BODY" runat="server">
         <p>
-            Username:
-                    <asp:TextBox ID="textUserName" runat="server"></asp:TextBox>
-        </p>
-        <p>
-            Password:&nbsp;
-                    <asp:TextBox ID="textPassword" runat="server" TextMode="Password"></asp:TextBox>
-        </p>
-        <asp:Button ID="Button1" runat="server" Text="Login" OnClick="Click_login" />
-        &nbsp;&nbsp;
-
-    <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signUpModal">
+            Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="loginUser" runat="server" TextMode="Email"></asp:TextBox><br />
+            Password: <asp:TextBox ID="loginPass" runat="server" TextMode="Password"></asp:TextBox><br />
+            <asp:Button ID="loginbtn" runat="server" Text="Login" OnClick="Loginbtn_Click" CausesValidation="False"/>
+            </p>
+    <p>
+            No account?<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signUpModal">
             Sign Up</button>
+
+        </p>
 
         <!-- Signup modal -->
         <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,16 +49,23 @@
                         <br />
                         Confirm Password:
                         <asp:TextBox ID="txt_confirmPassword" runat="server" TextMode="Password"></asp:TextBox>
+                        <!-- TODO Make this look better -->
+                            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" runat="server" ControlToValidate="txt_first" ForeColor="Red">Please enter your first name</asp:RequiredFieldValidator>
+                            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="Dynamic" runat="server" ControlToValidate="txt_last" ForeColor="Red">Please enter your last name</asp:RequiredFieldValidator>
+                            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator3" Display="Dynamic" runat="server" ControlToValidate="txt_email" ForeColor="Red">Please enter an email</asp:RequiredFieldValidator>
+                            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator4" Display="Dynamic" runat="server" ControlToValidate="txt_password" ForeColor="Red">Please create a password</asp:RequiredFieldValidator>
+                            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator5" Display="Dynamic" runat="server" ControlToValidate="txt_confirmPassword" ForeColor="Red">Please confirm your password</asp:RequiredFieldValidator>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <asp:Button ID="buttonSubmitSignup" runat="server" Text="Submit" OnClick="Click_signUpSubmit" />
+                        <asp:Button ID="buttonSubmitSignup" runat="server" Text="Submit" OnClick="Click_signUpSubmit"/>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Error modal -->
+     <!-- Error modal -->
         <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -102,4 +104,4 @@
                 </div>
             </div>
         </div>
-    </asp:Content>
+     </asp:Content>

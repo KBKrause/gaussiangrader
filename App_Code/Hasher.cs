@@ -6,7 +6,8 @@ using System.Text;
 using System.Web;
 
 /// <summary>
-/// Summary description for Hasher
+/// This lovely class was written by Dave from daveoncsharp.com. 
+/// It provides a hashing method used to protect text stored in databases.
 /// </summary>
 public class Hasher
 {

@@ -95,7 +95,11 @@ public partial class Login : System.Web.UI.Page
 
                 int count = (int)cmd.ExecuteScalar();
 
-                if (count > 0) returnValue = true;
+                if (count > 0)
+                {
+                    Session[Constants.EMAIL] = userName;
+                    returnValue = true;
+                }
             }
             catch (Exception ex)
             {
@@ -121,11 +125,12 @@ public partial class Login : System.Web.UI.Page
 
         if (authenticated)
         {
-            Server.Transfer("MemberPages/hub.aspx", true);
+            Session[Constants.USERNAME] = "logged in";
+            Server.Transfer("~/hub.aspx", true);
         }
         else
         {
-            System.Diagnostics.Debug.Print("Did not validate credntils");
+            System.Diagnostics.Debug.Print("Did not validate credentials");
         }
     }
 }

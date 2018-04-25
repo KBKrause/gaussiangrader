@@ -9,6 +9,9 @@ public partial class MemberPages_hub : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session[Constants.USERNAME] == null)
+        {
+            Response.Redirect("~/login.aspx");
+        }
     }
 }

@@ -13,5 +13,21 @@ public partial class MemberPages_hub : System.Web.UI.Page
         {
             Response.Redirect("~/login.aspx");
         }
+        else
+        {
+            string FK_instructor = "'" + (string)Session[Constants.EMAIL] + "'";
+            DatabaseManager db = new DatabaseManager("SELECT * FROM Classes WHERE FK_instructorID = " + FK_instructor);
+
+            db.Reader.Read();
+            
+            if (db.Reader.HasRows == false)
+            {
+                PageHandler.CallJavascript(this, "setElementText(You have no classes.)");
+            }
+            else
+            {
+                PageHandler.CallJavascript(this, "setElementText(You have some classes ...)");
+            }
+        }
     }
 }

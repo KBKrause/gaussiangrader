@@ -16,4 +16,9 @@ public sealed class PageHandler
 
         ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", functionCall, true);
     }
+
+    public static void CallJavascript(Page page, string functionCall)
+    {
+        ScriptManager.RegisterStartupScript(page, page.GetType(), "", functionCall, true);
+    }
 }

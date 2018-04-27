@@ -56,7 +56,7 @@ public sealed class DatabaseManager
         this.reader = reader;
     }
 
-    // use vectors
+    // TODO Fix sql injection.
     public static void InsertInstructor(string id, string first, string last, string pwd)
     {
         string connString = System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString;
@@ -77,6 +77,36 @@ public sealed class DatabaseManager
         sqlConnection1.Close();
     }
 
+    public static void InsertClass(string className, string courseCode, string instructorID)
+    {
+        string sql = "INSERT Classes (courseCode, title, FK_instructorId) VALUES (@courseCode, @title, @FK_instructorId)";
+
+        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
+        SqlCommand cmd = new SqlCommand(sql, conn);
+
+        cmd.Parameters.Add(AddStringParameter("courseCode", courseCode));
+        cmd.Parameters.Add(AddStringParameter("title", className));
+        cmd.Parameters.Add(AddStringParameter("FK_instructorId", instructorID));
+
+        conn.Open();
+
+        conn.Open();
+        cmd.ExecuteNonQuery();
+        conn.Close();
+
+        System.Diagnostics.Debug.Print("Attempted to insert");
+
+    }
+
+    private static SqlParameter AddStringParameter(string parameterName, string value)
+    {
+        SqlParameter param = new SqlParameter();
+        param.ParameterName = "@" + parameterName;
+        param.Value = value.Trim();
+
+        return param;
+    }
+
     ~DatabaseManager()
     {
         // Close the connection when this object is being gc'd.
@@ -88,3 +118,4 @@ public sealed class DatabaseManager
         System.Diagnostics.Debug.Print("DB conn closed");
     }
 }
+ 

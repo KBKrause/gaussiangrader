@@ -19,15 +19,18 @@ public partial class MemberPages_hub : System.Web.UI.Page
             DatabaseManager db = new DatabaseManager("SELECT * FROM Classes WHERE FK_instructorID = " + FK_instructor);
 
             db.Reader.Read();
-            
-            if (db.Reader.HasRows == false)
-            {
-                PageHandler.CallJavascript(this, "setElementText(You have no classes.)");
-            }
-            else
-            {
-                PageHandler.CallJavascript(this, "setElementText(You have some classes ...)");
-            }
+
+            PageHandler.SetClassList(this);
         }
+    }
+
+    protected void Click_addClass(object sender, EventArgs e)
+    {
+        System.Diagnostics.Debug.Print("Clicked to add class");
+    }
+
+    protected void Click_addAssignment(object sender, EventArgs e)
+    {
+        System.Diagnostics.Debug.Print("Clicked to add assignment");
     }
 }

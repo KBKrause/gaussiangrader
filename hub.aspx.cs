@@ -26,11 +26,11 @@ public partial class MemberPages_hub : System.Web.UI.Page
 
     protected void Click_addClass(object sender, EventArgs e)
     {
-        System.Diagnostics.Debug.Print("Clicked to add class");
+        DatabaseManager.InsertClass(txt_class_title.Text, txt_class_code.Text, (string)Session[Constants.EMAIL]);
     }
 
     protected void Click_addAssignment(object sender, EventArgs e)
     {
-        System.Diagnostics.Debug.Print("Clicked to add assignment");
+        DatabaseManager.InsertAssignment(txt_hw_name.Text, Int32.Parse(txt_hw_points.Text), txt_hw_coursecode.Text);
     }
 }

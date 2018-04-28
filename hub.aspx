@@ -32,7 +32,8 @@
         <br />
         <asp:RequiredFieldValidator ID="validator_courseCode" runat="server" ControlToValidate="txt_class_code" ErrorMessage="RequiredFieldValidator" ForeColor="Red">Invalid course code</asp:RequiredFieldValidator>
         <br />
-        <asp:Button ID="btn_submitClass" runat="server" Text="Submit" OnClick="Click_addClass" />
+        <!-- TODO add validation only to these fields -->
+        <asp:Button ID="btn_submitClass" runat="server" Text="Submit" OnClick="Click_addClass" CausesValidation="False" />
     </div>
     <hr />
     <div id="addingAssignmentsDiv">

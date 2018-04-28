@@ -57,6 +57,7 @@ public sealed class DatabaseManager
     }
 
     // TODO Fix sql injection.
+    // TODO error codes.
     public static void InsertInstructor(string id, string first, string last, string pwd)
     {
         string connString = System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString;
@@ -77,6 +78,7 @@ public sealed class DatabaseManager
         sqlConnection1.Close();
     }
 
+    // TODO Add error codes for : copy of primary key
     public static void InsertClass(string className, string courseCode, string instructorID)
     {
         string sql = "INSERT Classes (courseCode, title, FK_instructorId) VALUES (@courseCode, @title, @FK_instructorId)";
@@ -90,12 +92,35 @@ public sealed class DatabaseManager
 
         conn.Open();
 
-        conn.Open();
         cmd.ExecuteNonQuery();
         conn.Close();
 
-        System.Diagnostics.Debug.Print("Attempted to insert");
+        System.Diagnostics.Debug.Print("Attempted to insert class");
+    }
 
+    // TODO Ensure this inserts
+    public static void InsertAssignment(string name, int points, string courseCode)
+    {
+        string sql = "INSERT Assignments (Id, name, totalPoints, FK_courseCode) VALUES (@Id, @name, @totalPoints, @FK_courseCode)";
+
+        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
+        SqlCommand cmd = new SqlCommand(sql, conn);
+
+        cmd.Parameters.Add(AddStringParameter("name", name));
+
+        SqlParameter param = new SqlParameter();
+        param.ParameterName = "totalPoints";
+        param.Value = points;
+
+        cmd.Parameters.Add(param);
+        cmd.Parameters.Add(AddStringParameter("FK_courseCode", courseCode));
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+        conn.Close();
+
+        System.Diagnostics.Debug.Print("Attempted to insert assignment");
     }
 
     private static SqlParameter AddStringParameter(string parameterName, string value)

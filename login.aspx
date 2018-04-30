@@ -1,8 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="login.aspx.cs" Inherits="Login" %>
 
-<!-- TODO fix validation button press -->
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MASTER_HEADER" runat="server">
+    <!-- TODO fix validation button press -->
     <script src="login.js"></script>
         <script>
             function errorModal() {

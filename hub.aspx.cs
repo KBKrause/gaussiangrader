@@ -24,6 +24,7 @@ public partial class MemberPages_hub : System.Web.UI.Page
         }
     }
 
+    // TODO Re-add validation
     protected void Click_addClass(object sender, EventArgs e)
     {
         DatabaseManager.InsertClass(txt_class_title.Text, txt_class_code.Text, (string)Session[Constants.EMAIL]);

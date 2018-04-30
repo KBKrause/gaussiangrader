@@ -101,7 +101,7 @@ public sealed class DatabaseManager
     // TODO Ensure this inserts
     public static void InsertAssignment(string name, int points, string courseCode)
     {
-        string sql = "INSERT Assignments (Id, name, totalPoints, FK_courseCode) VALUES (@Id, @name, @totalPoints, @FK_courseCode)";
+        string sql = "INSERT Assignments (name, totalPoints, FK_courseCode) VALUES (@name, @totalPoints, @FK_courseCode)";
 
         SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
         SqlCommand cmd = new SqlCommand(sql, conn);

@@ -53,7 +53,7 @@
         <br />
         <asp:RequiredFieldValidator ID="validator_fkcoursecode" runat="server" ControlToValidate="txt_hw_coursecode" ErrorMessage="RequiredFieldValidator" ForeColor="Red">Invalid course code</asp:RequiredFieldValidator>
         <br />
-        <asp:Button ID="btn_submitHW" runat="server" Text="Submit" OnClick="Click_addAssignment" />
+        <asp:Button ID="btn_submitHW" runat="server" Text="Submit" OnClick="Click_addAssignment" CausesValidation="False" />
     </div>
 
     <div id="validatorsForThose">

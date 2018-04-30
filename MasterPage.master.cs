@@ -18,7 +18,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             db.Reader.Read();
 
-            labellogin.Text = "Wecome, " + db.Reader.GetString(1) + " " + db.Reader.GetString(2) + "!";
+            labellogin.Text = "Welcome, " + db.Reader.GetString(1) + " " + db.Reader.GetString(2) + "!";
             btnloginout.Text = "Logout";
             btnloginout.Click += new EventHandler(Click_logout);
         }
@@ -36,5 +36,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
         labellogin.Text = "You are not signed in.";
         btnloginout.Text = "Login";
         Response.Redirect("~/login.aspx");
+        Session.Abandon();
     }
 }

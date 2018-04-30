@@ -9,6 +9,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // TODO Logout acting strangely ....
         if (Session[Constants.USERNAME] != null)
         {
             string email = "'" + (string)Session[Constants.EMAIL] + "'";

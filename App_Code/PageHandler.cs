@@ -18,8 +18,27 @@ public sealed class PageHandler
         ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", functionCall, true);
     }
 
-    public static void SetClassList(Page page)
+    public static void SetClassList(Page page, string instructorID)
     {
-        ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", "setClassList('helloWorld')", true);
+        instructorID = "'" + instructorID + "'";
+
+        DatabaseManager db = new DatabaseManager("SELECT courseCode, title FROM Classes WHERE FK_instructorId = " + instructorID);
+
+        List<string> classNames = new List<string>();
+        List<string> classCodes = new List<string>();
+
+        while (db.Reader.Read())
+        {
+            classCodes.Add(db.Reader.GetString(0));
+            classNames.Add(db.Reader.GetString(1));
+        }
+
+        string[] arrClassNames = classNames.ToArray();
+        string[] arrClassCodes = classCodes.ToArray();
+
+
+
+        string func = "setClassList(" + instructorID + ")";
+        ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", func, true);
     }
 }

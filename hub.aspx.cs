@@ -20,7 +20,7 @@ public partial class MemberPages_hub : System.Web.UI.Page
 
             db.Reader.Read();
 
-            PageHandler.SetClassList(this);
+            PageHandler.SetClassList(this, (string)Session[Constants.EMAIL]);
         }
     }
 

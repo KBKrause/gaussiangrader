@@ -38,7 +38,7 @@
             </div>
                     <div class="col-sm-2">
                         <asp:Label ID="labellogin" runat="server" Text="Label"></asp:Label>
-                        <asp:Button ID="btnloginout" runat="server" Text="Login" PostBackUrl="~/login.aspx" />
+                        <asp:Button ID="btnloginout" runat="server" Text="Login" PostBackUrl="~/login.aspx" CausesValidation="False" />
                     </div>
         </div>
         <asp:ContentPlaceHolder id="MASTER_BODY" runat="server">

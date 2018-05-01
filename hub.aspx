@@ -16,7 +16,7 @@
   <div class="col-8">
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="list-class" role="tabpanel" aria-labelledby="list-class-list"></div>
-      <div class="tab-pane fade show" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">BLAH PROFILE</div>
+      <div class="tab-pane fade show" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list"></div>
     </div>
   </div>
 </div>

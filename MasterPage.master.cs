@@ -28,7 +28,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             labellogin.Text = "You are not signed in.";
         }
     }
-
+    // TODO this isn't working until you are on the login page.
     protected void Click_logout(object sender, EventArgs e)
     {
         Session[Constants.USERNAME] = null;
@@ -38,5 +38,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         btnloginout.Text = "Login";
         Response.Redirect("~/login.aspx");
         Session.Abandon();
+
+        // Perhaps do a "refresh" here.
     }
 }

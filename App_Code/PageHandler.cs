@@ -36,17 +36,18 @@ public sealed class PageHandler
         string[] arrClassNames = classNames.ToArray();
         string[] arrClassCodes = classCodes.ToArray();
 
-        string allTheFuncs = "setClassList(" + instructorID + ");";
+        string allTheFuncs = "setClassList(" + instructorID + "); ";
         //ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", func, true);
 
         foreach (string itr in arrClassNames)
         {
             string elem = "'" + itr + "'";
-            string appendFunc = "appendTextToList(" + elem + ");";
+            string appendFunc = "appendTextToList(" + elem + "); ";
             allTheFuncs += appendFunc;
         }
 
-        //ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", allTheFuncs, true);
-        ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", "<script>" + allTheFuncs + "</script>", false);
+        ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", allTheFuncs, true);
+        //ScriptManager.RegisterStartupScript(page, page.GetType(), "Modal", "<script>" + allTheFuncs + "</script>", false);
+        //ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "Modal", allTheFuncs, true);
     }
 }

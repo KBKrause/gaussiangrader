@@ -9,6 +9,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // TODO Logout acting strangely ....
         if (Session[Constants.USERNAME] != null)
         {
             string email = "'" + (string)Session[Constants.EMAIL] + "'";
@@ -18,7 +19,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             db.Reader.Read();
 
-            labellogin.Text = "Wecome, " + db.Reader.GetString(1) + " " + db.Reader.GetString(2) + "!";
+            labellogin.Text = "Welcome, " + db.Reader.GetString(1) + " " + db.Reader.GetString(2) + "!";
             btnloginout.Text = "Logout";
             btnloginout.Click += new EventHandler(Click_logout);
         }
@@ -27,7 +28,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             labellogin.Text = "You are not signed in.";
         }
     }
-
+    // TODO this isn't working until you are on the login page.
     protected void Click_logout(object sender, EventArgs e)
     {
         Session[Constants.USERNAME] = null;
@@ -36,5 +37,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
         labellogin.Text = "You are not signed in.";
         btnloginout.Text = "Login";
         Response.Redirect("~/login.aspx");
+        Session.Abandon();
+
+        // Perhaps do a "refresh" here.
     }
 }

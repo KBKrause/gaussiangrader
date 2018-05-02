@@ -18,7 +18,7 @@ public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
 
     protected void Click_signUpSubmit(object sender, EventArgs e)
@@ -126,7 +126,7 @@ public partial class Login : System.Web.UI.Page
         if (authenticated)
         {
             Session[Constants.USERNAME] = "logged in";
-            Server.Transfer("~/hub.aspx", true);
+            Response.Redirect("~/hub.aspx");
         }
         else
         {

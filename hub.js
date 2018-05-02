@@ -31,6 +31,28 @@ function setClassList(text) {
 }
 
 function redirectToClass(text) {
-    //console.log("The clicked button is " + text);
+    var postdata = JSON.stringify(
+        {
+            "className":text
+        });
+    try {
+        $.ajax({
+            type: "POST",
+            url: "classview.ashx",
+            cache: false,
+            data: postdata,
+            dataType: "json",
+            success: getSuccess,
+            error: getFail
+        });
+    } catch (e) {
+        alert(e);
+    }
+    function getSuccess(data, textStatus, jqXHR) {
+        alert(data.Response);
+    };
+    function getFail(jqXHR, textStatus, errorThrown) {
+        alert(jqXHR.status);
+    };
     window.location = "classview.aspx";
 }

@@ -10,4 +10,5 @@ public sealed class Constants
 {
     public const string USERNAME = "username";
     public const string EMAIL = "email";
+    public const string CURR_CLASS = "currclass";
 }

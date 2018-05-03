@@ -1,20 +1,56 @@
 <html>
+
 <head>
-<script src="jquery-2.1.4.min.js"></script>
-<script lang="javascript" src="xlsx.full.min.js"></script>
-<script lang="javascript" src="FileSaver.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script> -->
+        <script src="jquery-2.1.4.min.js"></script>
+        <script lang="javascript" src="xlsx.full.min.js"></script>
+        <script lang="javascript" src="FileSaver.js"></script>
+        <script>
+                var url = "sheet num1.xlsx";
+
+                /* set up async GET request */
+                var req = new XMLHttpRequest();
+                req.open("GET", url, true);
+                req.responseType = "arraybuffer";
+
+                req.onload = function (e) {
+                        var data = new Uint8Array(req.response);
+                        var workbook = XLSX.read(data, { type: "array" });
+
+                        /* DO SOMETHING WITH workbook HERE */
+
+
+                        var first_sheet_name = workbook.SheetNames[0];
+                        /* Get worksheet */
+                        var worksheet = workbook.Sheets[first_sheet_name];
+
+
+                        var jsonObject = XLSX.utils.sheet_to_json(worksheet);
+
+                        console.log(jsonObject);
+                }
+
+                req.send();
+
+        </script>
 
 </head>
-<body>
-<div id="navbar"><span>Red Stapler - SheetJS </span></div>
-<div id="wrapper">
-    
-        <button id="button-a">Create Excel</button>
-        <input type="file" id = "inputExcel" />
-</div>
 
-<script src="excel.js"></script>
-<script src="importExcel.js"></script>
+<body>
+        <div id="navbar">
+                <span>Red Stapler - SheetJS </span>
+        </div>
+        <div id="wrapper">
+
+                <button id="button-a">Create Excel</button>
+                <input type="file" id="inputExcel" />
+
+        </div>
+
+        <script src="excel.js"></script>
+        <script src="importExcel.js"></script>
 
 </body>
+
 </html>

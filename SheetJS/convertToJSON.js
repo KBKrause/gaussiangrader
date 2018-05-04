@@ -1,5 +1,4 @@
 // First, we import our excel spreadsheet.
-var filename = "";
 
 $("#inputExcel").change(function(e) {
   var reader = new FileReader();
@@ -28,9 +27,37 @@ if (fullPath) {
     fullPath.indexOf("\\") >= 0
       ? fullPath.lastIndexOf("\\")
       : fullPath.lastIndexOf("/");
-  filename = fullPath.substring(startIndex);
+  var filename = fullPath.substring(startIndex);
   if (filename.indexOf("\\") === 0 || filename.indexOf("/") === 0) {
     filename = filename.substring(1);
   }
   alert(filename);
 }
+
+;
+
+var url = filename;
+console.log(filename);
+
+/* set up async GET request */
+var req = new XMLHttpRequest();
+req.open("GET", url, true);
+req.responseType = "arraybuffer";
+
+req.onload = function(e) {
+  var data = new Uint8Array(req.response);
+  var workbook = XLSX.read(data, { type: "array" });
+
+  /* DO SOMETHING WITH workbook HERE */
+
+  var first_sheet_name = workbook.SheetNames[0];
+  /* Get worksheet */
+  var worksheet = workbook.Sheets[first_sheet_name];
+
+  var jsonObject = XLSX.utils.sheet_to_json(worksheet);
+
+  console.log(jsonObject);
+
+};
+
+req.send();

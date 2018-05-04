@@ -2,9 +2,11 @@
 
 using System;
 using System.Web;
+using System.Web.SessionState;
 
 public class classview : IHttpHandler
 {
+        // This was found at https://www.codeproject.com/Tips/832696/How-to-send-Data-from-JavaScript-to-Csharp-Server.
     public void ProcessRequest (HttpContext context)
     {
         string jsonString = String.Empty;
@@ -20,7 +22,8 @@ public class classview : IHttpHandler
             if (data != null)
             {
                 string className = data.className;
-                System.Diagnostics.Debug.Print("class name retrieved: " + className);
+                    Constants.CURR_CLASS = className;
+                System.Diagnostics.Debug.Print("class name retrieved from Constants: " + Constants.CURR_CLASS);
                 context.Response.Write(jSerialize.Serialize(
                      new
                      {

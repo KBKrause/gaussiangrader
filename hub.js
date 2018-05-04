@@ -46,10 +46,10 @@ function redirectToClass(text) {
             error: getFail
         });
     } catch (e) {
-        alert(e);
+        //alert(e);
     }
     function getSuccess(data, textStatus, jqXHR) {
-        alert(data.Response);
+        //alert(data.Response);
     };
     function getFail(jqXHR, textStatus, errorThrown) {
         alert(jqXHR.status);

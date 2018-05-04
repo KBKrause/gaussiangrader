@@ -28,16 +28,15 @@ if (fullPath) {
       ? fullPath.lastIndexOf("\\")
       : fullPath.lastIndexOf("/");
   var filename = fullPath.substring(startIndex);
+  console.log(filename);
   if (filename.indexOf("\\") === 0 || filename.indexOf("/") === 0) {
     filename = filename.substring(1);
   }
   alert(filename);
 }
 
-;
-
-var url = filename;
-console.log(filename);
+var url = "sheet num1.xlsx";
+//console.log(filename);
 
 /* set up async GET request */
 var req = new XMLHttpRequest();

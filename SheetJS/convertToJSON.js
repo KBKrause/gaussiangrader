@@ -19,6 +19,7 @@ $("#inputExcel").change(function(e) {
   };
 });
 
+
 // now that we have our spreadsheet displaying on an HTML page, we convert the data to a JSON object.
 
 var fullPath = document.getElementById("inputExcel").value;
@@ -56,7 +57,7 @@ req.onload = function(e) {
   var jsonObject = XLSX.utils.sheet_to_json(worksheet);
 
   console.log(jsonObject);
-
-};
+}
 
 req.send();
+

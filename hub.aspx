@@ -1,6 +1,12 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="hub.aspx.cs" Inherits="MemberPages_hub" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MASTER_HEADER" Runat="Server">
+
+    <!-- TODO For this page and classview:
+        Currently, you must have the tables open to view ids for students / classes / etc. to properly use the insert buttons.
+        Make it so that these appear on the page (so that we can completely avoid needing to have the tables open).
+     -->
+
     <script src="hub.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MASTER_BODY" runat="server">
@@ -56,7 +62,18 @@
         <asp:Button ID="btn_submitHW" runat="server" Text="Submit" OnClick="Click_addAssignment" CausesValidation="False" />
     </div>
 
-    <div id="validatorsForThose">
+    <div>
+
+
+        <!-- TODO Add validators -->
+        Add a student<br />
+        First name:
+        <asp:TextBox ID="txt_stuFirst" runat="server"></asp:TextBox>
+        <br />
+        Last name:
+        <asp:TextBox ID="txt_stuLast" runat="server"></asp:TextBox>
+        <br />
+        <asp:Button ID="btn_submitStudent" runat="server" Text="Submit" CausesValidation="False" OnClick="Click_addStudent" />
 
 
 

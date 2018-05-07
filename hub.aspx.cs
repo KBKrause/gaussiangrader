@@ -34,4 +34,9 @@ public partial class MemberPages_hub : System.Web.UI.Page
     {
         DatabaseManager.InsertAssignment(txt_hw_name.Text, Int32.Parse(txt_hw_points.Text), txt_hw_coursecode.Text);
     }
+
+    protected void Click_addStudent(object sender, EventArgs e)
+    {
+        DatabaseManager.InsertStudent(txt_stuFirst.Text, txt_stuLast.Text);
+    }
 }

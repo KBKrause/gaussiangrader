@@ -41,7 +41,9 @@ public sealed class PageHandler
 
         foreach (string itr in arrClassNames)
         {
+            // TODO It's a bad idea to have this very specfic JS function being called from this class.
             string elem = "'" + itr + "'";
+            // TODO add the course code here, then modify the JS function to add this to the GET request so we can insert properly into tables.
             string appendFunc = "appendTextToList(" + elem + "); ";
             allTheFuncs += appendFunc;
         }

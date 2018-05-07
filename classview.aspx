@@ -18,7 +18,18 @@
             <br />
             <asp:SqlDataSource ID="SQLAssignSource" runat="server" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Gradebook.mdf;Integrated Security=True;Connect Timeout=30" ProviderName="System.Data.SqlClient" SelectCommand="SELECT name, totalPoints FROM Assignments, Classes WHERE Assignments.FK_courseCode = Classes.courseCode"></asp:SqlDataSource>
             <br />
-            <asp:FileUpload ID="FileUpload1" runat="server" />
             <br /></div>
+    <div>
 
+
+        Add student to (a) class:<br />
+        Course code:
+        <asp:TextBox ID="txt_courseCode" runat="server"></asp:TextBox>
+        <br />
+        Student&#39;s ID: <asp:TextBox ID="txt_studentID" runat="server" TextMode="Number"></asp:TextBox>
+        <br />
+        <asp:Button ID="btn_addStudentToClass" runat="server" Text="Submit" />
+
+
+    </div>
     </asp:Content>

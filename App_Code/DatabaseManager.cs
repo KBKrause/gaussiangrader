@@ -123,6 +123,29 @@ public sealed class DatabaseManager
         System.Diagnostics.Debug.Print("Attempted to insert assignment");
     }
 
+    public static void InsertStudent(string first, string last)
+    {
+        string sql = "INSERT Students (first, last) VALUES (@first, @last)";
+
+        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
+        SqlCommand cmd = new SqlCommand(sql, conn);
+
+        cmd.Parameters.Add(AddStringParameter("first", first));
+        cmd.Parameters.Add(AddStringParameter("last", last));
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+        conn.Close();
+
+        System.Diagnostics.Debug.Print("Attempted to insert student");
+    }
+
+    public static void InsertStudentIntoClass(string courseCode, int studentID)
+    {
+
+    }
+
     private static SqlParameter AddStringParameter(string parameterName, string value)
     {
         SqlParameter param = new SqlParameter();

@@ -32,6 +32,6 @@ public partial class classview : System.Web.UI.Page
 
     protected void InsertStudentInClass(object sender, EventArgs e)
     {
-
+        DatabaseManager.InsertStudentIntoClass(txt_courseCode.Text, Int32.Parse(txt_studentID.Text));
     }
 }

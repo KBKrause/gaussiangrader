@@ -143,7 +143,24 @@ public sealed class DatabaseManager
 
     public static void InsertStudentIntoClass(string courseCode, int studentID)
     {
+        string sql = "INSERT StudentsAndClasses (studentId, classcourseCode) VALUES (@studentId, @classcourseCode)";
 
+        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
+        SqlCommand cmd = new SqlCommand(sql, conn);
+
+        cmd.Parameters.Add(AddStringParameter("classcourseCode", courseCode));
+
+        SqlParameter param = new SqlParameter();
+        param.ParameterName = "studentID";
+        param.Value = studentID;
+        cmd.Parameters.Add(param);
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+        conn.Close();
+
+        System.Diagnostics.Debug.Print("Attempted to insert student for class ");
     }
 
     private static SqlParameter AddStringParameter(string parameterName, string value)

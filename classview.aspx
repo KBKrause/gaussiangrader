@@ -26,9 +26,10 @@
         Course code:
         <asp:TextBox ID="txt_courseCode" runat="server"></asp:TextBox>
         <br />
-        Student&#39;s ID: <asp:TextBox ID="txt_studentID" runat="server" TextMode="Number"></asp:TextBox>
+        Student&#39;s ID:
+        <asp:TextBox ID="txt_studentID" runat="server" TextMode="Number"></asp:TextBox>
         <br />
-        <asp:Button ID="btn_addStudentToClass" runat="server" Text="Submit" />
+        <asp:Button ID="btn_addStudentToClass" runat="server" OnClick="InsertStudentInClass" Text="Submit" />
 
 
     </div>

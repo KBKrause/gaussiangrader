@@ -34,4 +34,9 @@ public partial class classview : System.Web.UI.Page
     {
         DatabaseManager.InsertStudentIntoClass(txt_courseCode.Text, Int32.Parse(txt_studentID.Text));
     }
+
+    protected void InsertStudentScore(object sender, EventArgs e)
+    {
+        DatabaseManager.InsertStudentScore(Int32.Parse(txt_stuas_stu.Text), Int32.Parse(txt_stuas_assign.Text), Int32.Parse(txt_stuas_pts.Text));
+    }
 }

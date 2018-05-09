@@ -33,4 +33,22 @@
 
 
     </div>
+
+    <div>
+
+
+
+        Add a grade for a student&#39;s assignment:<br />
+        Student&#39;s ID:&nbsp;&nbsp;&nbsp;
+        <asp:TextBox ID="txt_stuas_stu" runat="server" TextMode="Number"></asp:TextBox>
+        <br />
+        Assignment ID:<asp:TextBox ID="txt_stuas_assign" runat="server" TextMode="Number"></asp:TextBox>
+        <br />
+        Points rec&#39;d:&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="txt_stuas_pts" runat="server" TextMode="Number"></asp:TextBox>
+        <br />
+        <asp:Button ID="submitStudentAssign" runat="server" OnClick="InsertStudentScore" Text="Button" />
+
+
+
+    </div>
     </asp:Content>

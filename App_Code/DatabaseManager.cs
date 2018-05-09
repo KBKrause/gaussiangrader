@@ -163,6 +163,36 @@ public sealed class DatabaseManager
         System.Diagnostics.Debug.Print("Attempted to insert student for class ");
     }
 
+    public static void InsertStudentScore(int studentID, int assignID, int scoresRcd)
+    {
+        string sql = "INSERT StudentsAndAssignments (studentId, assignmentId, pointsRecd) VALUES (@studentId, @assignmentId, @pointsRecd)";
+
+        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
+        SqlCommand cmd = new SqlCommand(sql, conn);
+
+        SqlParameter param = new SqlParameter();
+        param.ParameterName = "studentId";
+        param.Value = studentID;
+        cmd.Parameters.Add(param);
+
+        SqlParameter param2 = new SqlParameter();
+        param2.ParameterName = "assignmentId";
+        param2.Value = assignID;
+        cmd.Parameters.Add(param2);
+
+        SqlParameter param3 = new SqlParameter();
+        param3.ParameterName = "pointsRecd";
+        param3.Value = scoresRcd;
+        cmd.Parameters.Add(param3);
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+        conn.Close();
+
+        System.Diagnostics.Debug.Print("Attempted to insert student grade");
+    }
+
     private static SqlParameter AddStringParameter(string parameterName, string value)
     {
         SqlParameter param = new SqlParameter();

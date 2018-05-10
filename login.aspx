@@ -3,14 +3,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MASTER_HEADER" runat="server">
     <!-- TODO fix validation button press -->
     <script src="login.js"></script>
-        <script>
-            function errorModal() {
-    $('#errorModal').modal('show');
-}
-        function successModal() {
-            $('#successModal').modal('show');
-        }
-    </script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MASTER_BODY" runat="server">
         <p>

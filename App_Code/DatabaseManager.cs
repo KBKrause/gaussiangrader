@@ -98,7 +98,6 @@ public sealed class DatabaseManager
         System.Diagnostics.Debug.Print("Attempted to insert class");
     }
 
-    // TODO Ensure this inserts
     public static void InsertAssignment(string name, int points, string courseCode)
     {
         string sql = "INSERT Assignments (name, totalPoints, FK_courseCode) VALUES (@name, @totalPoints, @FK_courseCode)";
@@ -107,12 +106,7 @@ public sealed class DatabaseManager
         SqlCommand cmd = new SqlCommand(sql, conn);
 
         cmd.Parameters.Add(AddStringParameter("name", name));
-
-        SqlParameter param = new SqlParameter();
-        param.ParameterName = "totalPoints";
-        param.Value = points;
-
-        cmd.Parameters.Add(param);
+        cmd.Parameters.Add(AddIntParameter("totalPoints", points));
         cmd.Parameters.Add(AddStringParameter("FK_courseCode", courseCode));
 
         conn.Open();
@@ -149,11 +143,7 @@ public sealed class DatabaseManager
         SqlCommand cmd = new SqlCommand(sql, conn);
 
         cmd.Parameters.Add(AddStringParameter("classcourseCode", courseCode));
-
-        SqlParameter param = new SqlParameter();
-        param.ParameterName = "studentID";
-        param.Value = studentID;
-        cmd.Parameters.Add(param);
+        cmd.Parameters.Add(AddIntParameter("studentId", studentID));
 
         conn.Open();
 
@@ -170,20 +160,9 @@ public sealed class DatabaseManager
         SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
         SqlCommand cmd = new SqlCommand(sql, conn);
 
-        SqlParameter param = new SqlParameter();
-        param.ParameterName = "studentId";
-        param.Value = studentID;
-        cmd.Parameters.Add(param);
-
-        SqlParameter param2 = new SqlParameter();
-        param2.ParameterName = "assignmentId";
-        param2.Value = assignID;
-        cmd.Parameters.Add(param2);
-
-        SqlParameter param3 = new SqlParameter();
-        param3.ParameterName = "pointsRecd";
-        param3.Value = scoresRcd;
-        cmd.Parameters.Add(param3);
+        cmd.Parameters.Add(AddIntParameter("studentId", studentID));
+        cmd.Parameters.Add(AddIntParameter("assignmentId", assignID));
+        cmd.Parameters.Add(AddIntParameter("pointsRecd", scoresRcd));
 
         conn.Open();
 
@@ -191,6 +170,15 @@ public sealed class DatabaseManager
         conn.Close();
 
         System.Diagnostics.Debug.Print("Attempted to insert student grade");
+    }
+
+    private static SqlParameter AddIntParameter(string parameterName, int value)
+    {
+        SqlParameter param = new SqlParameter();
+        param.ParameterName = "@" + parameterName;
+        param.Value = value;
+
+        return param;
     }
 
     private static SqlParameter AddStringParameter(string parameterName, string value)

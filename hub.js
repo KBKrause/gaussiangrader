@@ -8,6 +8,17 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 var uniqueID = 0;
 
+$(document).ready(function () {
+    var navbar = document.getElementById("navbarChange");
+
+    navbar.innerHTML = "<li class='nav-item'> \
+        <a class='nav-link' href='index.aspx' > Home </a > \
+        </li > \
+        <li class='nav-item active'> \
+            <a class='nav-link' href='hub.aspx'>Hub<span class='sr-only'> (current)</span > </a> \
+        </li>";
+});
+
 function setElementText(id, text) {
     $(id).html(text);
 }

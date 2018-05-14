@@ -6,7 +6,7 @@
     </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MASTER_BODY" runat="server">
         <div>
-            Class information for
+            Assignments for
             <asp:Label ID="classNameLabel" runat="server" Font-Bold="True" Text="currentClassName"></asp:Label>
             <br />
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SQLAssignSource">
@@ -18,6 +18,17 @@
             <br />
             <asp:SqlDataSource ID="SQLAssignSource" runat="server" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Gradebook.mdf;Integrated Security=True;Connect Timeout=30" ProviderName="System.Data.SqlClient" SelectCommand="SELECT name, totalPoints FROM Assignments, Classes WHERE Assignments.FK_courseCode = Classes.courseCode"></asp:SqlDataSource>
             <br />
+            Students for <asp:Label ID="studentsGridLabel" runat="server" Font-Bold="True" Text="Label"></asp:Label>
+            <br />
+            <asp:GridView ID="studentGrid" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SQLStudentRoster">
+                <Columns>
+                    <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+                    <asp:BoundField DataField="first" HeaderText="first" SortExpression="first" />
+                    <asp:BoundField DataField="last" HeaderText="last" SortExpression="last" />
+                </Columns>
+            </asp:GridView>
+            <br />
+            <asp:SqlDataSource ID="SQLStudentRoster" runat="server" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Gradebook.mdf;Integrated Security=True;Connect Timeout=30" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Students.Id, Students.first, Students.last FROM Classes, Students, StudentsAndClasses WHERE StudentsAndClasses.classcourseCode = Classes.courseCode"></asp:SqlDataSource>
             <br /></div>
     <div>
 

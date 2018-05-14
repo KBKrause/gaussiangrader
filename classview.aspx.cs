@@ -21,7 +21,13 @@ public partial class classview : System.Web.UI.Page
             SQLAssignSource.SelectCommand = "SELECT name, totalPoints FROM Assignments, Classes WHERE Assignments.FK_courseCode = Classes.courseCode AND Classes.title = @classTitle";
             SQLAssignSource.SelectParameters.Clear();
             SQLAssignSource.SelectParameters.Add("classTitle", Constants.CURR_CLASS);
+
+            SQLStudentRoster.SelectCommand = "SELECT Students.Id, Students.first, Students.last FROM Classes, Students, StudentsAndClasses WHERE StudentsAndClasses.classcourseCode = Classes.courseCode AND StudentsAndClasses.studentId = Students.Id AND Classes.title = @title";
+            SQLStudentRoster.SelectParameters.Clear();
+            SQLStudentRoster.SelectParameters.Add("title", Constants.CURR_CLASS);
+
             classNameLabel.Text = Constants.CURR_CLASS;
+            studentsGridLabel.Text = Constants.CURR_CLASS;
         }
     }
 

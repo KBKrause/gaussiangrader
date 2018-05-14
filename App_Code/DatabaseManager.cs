@@ -11,6 +11,13 @@ using System.Web;
 /// </summary>
 public sealed class DatabaseManager
 {
+    private struct SQLAbstraction
+    {
+        public string sql;
+        public SqlConnection conn;
+        public SqlCommand cmd;
+    };
+
     private string queryText;
 
     // This syntax declares a private SqlDataReader called reader.
@@ -60,22 +67,16 @@ public sealed class DatabaseManager
     // TODO error codes.
     public static void InsertInstructor(string id, string first, string last, string pwd)
     {
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString;
+        string sql = "INSERT Instructors (Id, first, last, pwd) VALUES (@Id, @first, @last, @pwd)";
 
-        System.Data.SqlClient.SqlConnection sqlConnection1 = new System.Data.SqlClient.SqlConnection(connString);
+        SQLAbstraction abs = CreateSQL(sql);
 
-        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
-        cmd.CommandType = System.Data.CommandType.Text;
+        abs.cmd.Parameters.Add(AddStringParameter("Id", id));
+        abs.cmd.Parameters.Add(AddStringParameter("first", first));
+        abs.cmd.Parameters.Add(AddStringParameter("last", last));
+        abs.cmd.Parameters.Add(AddStringParameter("pwd", pwd));
 
-        string valuesString = "('" + id + "', '" + first + "', '" + last + "', '" + pwd + "')";
-        System.Diagnostics.Debug.Print("valuesString: " + valuesString);
-
-        cmd.CommandText = "INSERT Instructors (Id, first, last, pwd) VALUES " + valuesString;
-        cmd.Connection = sqlConnection1;
-
-        sqlConnection1.Open();
-        cmd.ExecuteNonQuery();
-        sqlConnection1.Close();
+        ExecuteNonquery(ref abs);
     }
 
     // TODO Add error codes for : copy of primary key
@@ -83,17 +84,13 @@ public sealed class DatabaseManager
     {
         string sql = "INSERT Classes (courseCode, title, FK_instructorId) VALUES (@courseCode, @title, @FK_instructorId)";
 
-        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
-        SqlCommand cmd = new SqlCommand(sql, conn);
+        SQLAbstraction abs = CreateSQL(sql);
 
-        cmd.Parameters.Add(AddStringParameter("courseCode", courseCode));
-        cmd.Parameters.Add(AddStringParameter("title", className));
-        cmd.Parameters.Add(AddStringParameter("FK_instructorId", instructorID));
+        abs.cmd.Parameters.Add(AddStringParameter("courseCode", courseCode));
+        abs.cmd.Parameters.Add(AddStringParameter("title", className));
+        abs.cmd.Parameters.Add(AddStringParameter("FK_instructorId", instructorID));
 
-        conn.Open();
-
-        cmd.ExecuteNonQuery();
-        conn.Close();
+        ExecuteNonquery(ref abs);
 
         System.Diagnostics.Debug.Print("Attempted to insert class");
     }
@@ -102,17 +99,13 @@ public sealed class DatabaseManager
     {
         string sql = "INSERT Assignments (name, totalPoints, FK_courseCode) VALUES (@name, @totalPoints, @FK_courseCode)";
 
-        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
-        SqlCommand cmd = new SqlCommand(sql, conn);
+        SQLAbstraction abs = CreateSQL(sql);
 
-        cmd.Parameters.Add(AddStringParameter("name", name));
-        cmd.Parameters.Add(AddIntParameter("totalPoints", points));
-        cmd.Parameters.Add(AddStringParameter("FK_courseCode", courseCode));
+        abs.cmd.Parameters.Add(AddStringParameter("name", name));
+        abs.cmd.Parameters.Add(AddIntParameter("totalPoints", points));
+        abs.cmd.Parameters.Add(AddStringParameter("FK_courseCode", courseCode));
 
-        conn.Open();
-
-        cmd.ExecuteNonQuery();
-        conn.Close();
+        ExecuteNonquery(ref abs);
 
         System.Diagnostics.Debug.Print("Attempted to insert assignment");
     }
@@ -121,16 +114,12 @@ public sealed class DatabaseManager
     {
         string sql = "INSERT Students (first, last) VALUES (@first, @last)";
 
-        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
-        SqlCommand cmd = new SqlCommand(sql, conn);
+        SQLAbstraction abs = CreateSQL(sql);
 
-        cmd.Parameters.Add(AddStringParameter("first", first));
-        cmd.Parameters.Add(AddStringParameter("last", last));
+        abs.cmd.Parameters.Add(AddStringParameter("first", first));
+        abs.cmd.Parameters.Add(AddStringParameter("last", last));
 
-        conn.Open();
-
-        cmd.ExecuteNonQuery();
-        conn.Close();
+        ExecuteNonquery(ref abs);
 
         System.Diagnostics.Debug.Print("Attempted to insert student");
     }
@@ -139,16 +128,12 @@ public sealed class DatabaseManager
     {
         string sql = "INSERT StudentsAndClasses (studentId, classcourseCode) VALUES (@studentId, @classcourseCode)";
 
-        SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
-        SqlCommand cmd = new SqlCommand(sql, conn);
+        SQLAbstraction abs = CreateSQL(sql);
 
-        cmd.Parameters.Add(AddStringParameter("classcourseCode", courseCode));
-        cmd.Parameters.Add(AddIntParameter("studentId", studentID));
+        abs.cmd.Parameters.Add(AddStringParameter("classcourseCode", courseCode));
+        abs.cmd.Parameters.Add(AddIntParameter("studentId", studentID));
 
-        conn.Open();
-
-        cmd.ExecuteNonQuery();
-        conn.Close();
+        ExecuteNonquery(ref abs);
 
         System.Diagnostics.Debug.Print("Attempted to insert student for class ");
     }
@@ -157,19 +142,37 @@ public sealed class DatabaseManager
     {
         string sql = "INSERT StudentsAndAssignments (studentId, assignmentId, pointsRecd) VALUES (@studentId, @assignmentId, @pointsRecd)";
 
+        SQLAbstraction abs = CreateSQL(sql);
+
+        abs.cmd.Parameters.Add(AddIntParameter("studentId", studentID));
+        abs.cmd.Parameters.Add(AddIntParameter("assignmentId", assignID));
+        abs.cmd.Parameters.Add(AddIntParameter("pointsRecd", scoresRcd));
+
+        ExecuteNonquery(ref abs);
+
+        System.Diagnostics.Debug.Print("Attempted to insert student grade");
+    }
+
+    private static void ExecuteNonquery(ref SQLAbstraction abs)
+    {
+        abs.conn.Open();
+        abs.cmd.ExecuteNonQuery();
+        abs.conn.Close();
+    }
+
+    private static SQLAbstraction CreateSQL(string sql)
+    {
         SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["GradebookConnectionString"].ConnectionString);
         SqlCommand cmd = new SqlCommand(sql, conn);
 
-        cmd.Parameters.Add(AddIntParameter("studentId", studentID));
-        cmd.Parameters.Add(AddIntParameter("assignmentId", assignID));
-        cmd.Parameters.Add(AddIntParameter("pointsRecd", scoresRcd));
+        SQLAbstraction ret = new SQLAbstraction
+        {
+            sql = sql,
+            conn = conn,
+            cmd = cmd
+        };
 
-        conn.Open();
-
-        cmd.ExecuteNonQuery();
-        conn.Close();
-
-        System.Diagnostics.Debug.Print("Attempted to insert student grade");
+        return ret;
     }
 
     private static SqlParameter AddIntParameter(string parameterName, int value)

@@ -1,6 +1,9 @@
 var myCanvas = document.getElementById("myCanvas");
 myCanvas.width = 300;
 myCanvas.height = 300;
+
+var nameOfSet;
+var dataToSet;
   
 var ctx = myCanvas.getContext("2d");
 
@@ -21,6 +24,14 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color)
     ctx.fillStyle=color;
     ctx.fillRect(upperLeftCornerX,upperLeftCornerY,width,height);
     ctx.restore();
+}
+
+function getData(jObject) {
+    dataToSet = JSON.parse(jObject);
+    name = jObject.name;
+    nameOfset = name;
+
+    return dataToSet;
 }
 
 var myData = {
@@ -123,7 +134,7 @@ var myBarchart = new Barchart(
         padding:20,
         gridScale:5,
         gridColor:"#eeeeee",
-        data:myData,
+        data:dataToSet,
         colors:['blue','red', 'green','silver', 'gold']
     }
 );
